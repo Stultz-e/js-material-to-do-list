@@ -40,14 +40,35 @@ function addTask(e) {
     link.innerHTML = '<i class="fa fa-remove"></i>';
     // Append the link to li
     li.appendChild(link);
+
+    //store in local storage
+    storeTaskinLocalStorage(taskInput.value);
+
     // Append li to ul
     taskList.appendChild(li);
     //clear input 
     taskInput.value = '';
 
-
     e.preventDefault();
 }
+
+// Store Task
+function storeTaskinLocalStorage(task) {
+    let tasks;
+    if(localStorage.getItem('tasks') === null) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+
+}
+
+
 
 //Remove Task 
 function removeTask(e) {
@@ -83,3 +104,7 @@ function filterTasks(e) {
         }
     });
 }
+
+
+
+
